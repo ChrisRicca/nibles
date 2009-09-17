@@ -1,20 +1,27 @@
 <html>
   <head>
+    <script src="/javascripts/dropioApiClient.js" language="javascript" type="text/javascript"></script>
     <script>
-        
+      
+    var dropioApi = new DropioApiClient("1aca9fef21a9110c9f583c4ea8202ee23e5f8e94","http://localhost:9393/DropioJSClientXDReceiver.html");
+
       function checkLocationHash() {
         locationHash = unescape(document.location.hash);
         document.location.hash = "";
         
-        if(locationHash != "") {
-          alert("THE LOCATION HASH CHANGED! IT IS NOW: " + locationHash);
+        if(locationHash != "") {          
+          dropioApi.createDrop({},function(response,success){
+            if(success) {
+              alert(response.name);
+            }
+          });
         }
         
         window.setTimeout(checkLocationHash,100)
       }
       
       checkLocationHash();
-      
+            
     </script>
   </head>
   <body>
