@@ -1,0 +1,22 @@
+<html>
+  <head>
+    <script>
+        
+      function checkLocationHash() {
+        locationHash = unescape(document.location.hash);
+        document.location.hash = "";
+        
+        if(locationHash != "") {
+          alert("THE LOCATION HASH CHANGED! IT IS NOW: " + locationHash);
+        }
+        
+        window.setTimeout(checkLocationHash,100)
+      }
+      
+      checkLocationHash();
+      
+    </script>
+  </head>
+  <body>
+  </body>
+</html>

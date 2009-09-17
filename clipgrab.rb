@@ -16,3 +16,8 @@ get '/' do
   @drop = Dropio::Drop.create()
   @drop.name
 end
+
+get '/:dropname/iframe' do
+  @dropname = params[:dropname]
+  erb :iframe
+end
