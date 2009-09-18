@@ -26,7 +26,7 @@ get '/' do
 end
 
 post '/' do
-  @drop = Dropio::Drop.create(:default_view => 'blog')
+  @drop = Dropio::Drop.create()
   redirect "/#{@drop.name}", 303
 end
 

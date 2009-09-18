@@ -16,7 +16,7 @@ _ClipGrab.Grabber = function(){
     this.uiContainer = document.createElement('div');
     this.uiContainer.setAttribute('style',"position:fixed;top:0px;right:0px;background-color:#FFFFFF;border-bottom:1px solid #333333;width:100%;height:40px;z-index:99999;");
     imgHTML = "<img style='float:left;margin-top:3px;margin-left:3px' src='" + _ClipGrab.hostname + "images/nibles_small.png'/>";
-    linkHTML = "<a style='float:right;font-size:16px;margin-top:6px;padding:3px;margin-right:22px;color:#D32323;' href='http://drop.io/" + this.targetDrop().name + "'>view all items in this NIBL</a>";
+    linkHTML = "<a style='float:right;font-size:16px;margin-top:6px;padding:3px;margin-right:22px;color:#D32323;' href='http://drop.io/" + this.targetDrop().name + "/blog'>view all items in this NIBL</a>";
     helpHTML = "<div style='float:left;margin-top:19px;margin-left:10px;font-size:11px;color:#999999;'>did you know?  you can add snippets by highlighting text in the page below</div>";
     plusImgHtml = "<img style= 'display:none;position:fixed;top:10px;left:80px;' src='" + _ClipGrab.hostname + "images/plus.png'/>"
     this.uiContainer.innerHTML = imgHTML + helpHTML + linkHTML + plusImgHtml;
