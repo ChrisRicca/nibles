@@ -39,9 +39,11 @@ _ClipGrab.Grabber = function(){
   };
   
   this.activate = function() {
-    for each (var img in document.getElementsByTagName('img')) {
-      if(img.tagName == "IMG") _ClipGrab.buildLinkForImage(img);
-    };
+    images = document.getElementsByTagName('img')
+    
+    for (var i = 0; i < images.length; i++) { 
+      if(images[i].tagName == "IMG") _ClipGrab.buildLinkForImage(images[i]);
+    }
   };
   
   this.initialize();
