@@ -1,4 +1,4 @@
-GRAB_CLIP_BASE_URL = 'http://localhost:9393/hackathontest/iframe'
+GRAB_CLIP_BASE_URL = 'http://localhost:9393/iframe'
 
 UIhud = document.createElement('div');
 UIhud.setAttribute('style',"position:fixed;top:0px;right:0px;background-color:#EEEEEE;border-left:1px solid #333333;border-bottom:1px solid #333333;width:200px;height:40px;");

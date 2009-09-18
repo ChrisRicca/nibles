@@ -1,0 +1,5 @@
+_ClipGrab.targetDrop = {name:'<%= @dropname %>'};
+if (!_ClipGrab.status) {
+  _ClipGrab.status = 'loading';
+  _ClipGrab.loadScript('<%= HOSTNAME %>/javascripts/clip_grab.js?ts=<%= DEPLOY_TIMESTAMP %>')
+}

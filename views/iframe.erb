@@ -3,25 +3,32 @@
     <script src="/javascripts/dropioApiClient.js" language="javascript" type="text/javascript"></script>
     <script>
       
-    var dropioApi = new DropioApiClient("1aca9fef21a9110c9f583c4ea8202ee23e5f8e94","http://localhost:9393/DropioJSClientXDReceiver.html");
+      var dropioApi = new DropioApiClient("1aca9fef21a9110c9f583c4ea8202ee23e5f8e94","<%= HOSTNAME %>DropioJSClientXDReceiver.html");
 
+      actions = {
+        addfile:function(dropname,url){
+          dropioApi.createFileFromUrl({drop_name:dropname,file_url:url}, function(){});
+        }
+      }
+      
       function checkLocationHash() {
-        locationHash = unescape(document.location.hash);
+        locationHash = document.location.hash;
         document.location.hash = "";
         
-        if(locationHash != "") {          
-          dropioApi.createDrop({},function(response,success){
-            if(success) {
-              alert(response.name);
-            }
-          });
+        if(locationHash != "") {
+          if (locationHash[0] = "#") {
+            locationHash = locationHash.substring(1,locationHash.length-1)
+          }
+          data = locationHash.split('_a_a_a_');
+          dropname = data[0];
+          action = data[1];
+          message = unescape(data[2]);
+          actions[action](dropname,message)
         }
-        
         window.setTimeout(checkLocationHash,100)
       }
       
       checkLocationHash();
-            
     </script>
   </head>
   <body>

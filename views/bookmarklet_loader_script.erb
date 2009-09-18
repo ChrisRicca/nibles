@@ -1,0 +1,8 @@
+if(typeof(_ClipGrab) == 'undefined'){ _ClipGrab = {hostname:'<%= HOSTNAME %>'}};
+_ClipGrab.loadScript = function(source) {
+  scr = document.createElement('script');
+  scr.type = 'text/javascript';
+  scr.src = source;
+  document.getElementsByTagName('head')[0].appendChild(scr);
+};
+_ClipGrab.loadScript('<%= HOSTNAME + dropname %>/go_bookmarklet.js');
