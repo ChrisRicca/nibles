@@ -22,7 +22,7 @@ configure :development do
 end
 
 get '/' do
-  "<form action='/' method='post'><input type='submit' value='Create a new Bin'/></form>"
+  erb :new, :layout => :application
 end
 
 post '/' do
@@ -36,7 +36,7 @@ end
 
 get '/:dropname' do
   @dropname = params[:dropname]
-  erb :get_bookmarklet
+  erb :get_bookmarklet, :layout => :application
 end
 
 get '/:dropname/go_bookmarklet.js' do

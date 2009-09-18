@@ -1,0 +1,45 @@
+body {
+  font-family: helvetica;
+}
+
+form input {
+  font-size:30px;
+  margin:auto;
+  margin-top:150px;
+  display:block;
+}
+
+#drag {
+  height:303px;
+  left:50%;
+  margin-left:0;
+  position:fixed;
+  top:28px;
+  width:404px;
+  background-image:url(/images/drag.png);
+  z-index:-1;
+}
+
+a {
+  color:#444444;
+  font-size:11px;
+}
+
+#bookmarklet {
+  background-color:#DDDDDD;
+  border:1px solid #999999;
+  color:#333333;
+  padding:6px;
+  padding-bottom:4px;
+  text-decoration:none;
+  font-size:20px;
+  display:block;
+  text-align:center;
+  margin-bottom:5px;
+}
+
+#bookmarkletContainer {
+  width:200px;
+  margin:auto;
+  margin-top:150px;
+}
