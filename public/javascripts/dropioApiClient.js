@@ -81,11 +81,16 @@ function DropioApiClient(the_api_key,the_xd_path,opts) {
       this.sendApiRequest(DropioApiClient.createNoteUrl(params.drop_name),DropioApiClient.CREATE_NOTE_METHOD,params,callback);
     };
     
+    this.createFileFromUrl = function(params,callback) {
+      if( !DropioApiClient.validateParams(params,DropioApiClient.CREATE_FILE_FROM_URL_ACTION,callback) ) return;
+      this.sendApiRequest(DropioApiClient.createFileFromUrlUrl(params.drop_name),DropioApiClient.CREATE_FILE_FROM_URL_METHOD,params,callback);
+    };
+    
     // ONLY FOR FIREFOX EXTENSIONS
     this.createFile = function(params,onprogress,callback) {
       if( !DropioApiClient.validateParams(params,DropioApiClient.CREATE_FILE_ACTION,callback) ) return;
       this.sendAjaxUploadRequest(DropioApiClient.createFileUrl(),DropioApiClient.CREATE_FILE_METHOD,params,onprogress,callback);
-    }
+    };
     
     this.getAssetList = function(params,callback) {
       if( !DropioApiClient.validateParams(params,DropioApiClient.GET_ASSET_LIST_ACTION,callback) ) return;
@@ -475,6 +480,7 @@ DropioApiClient.UPDATE_DROP_URL = "drops/{drop_name}";
 DropioApiClient.DELETE_DROP_URL = "drops/{drop_name}";
 DropioApiClient.CREATE_LINK_URL = "drops/{drop_name}/assets";
 DropioApiClient.CREATE_NOTE_URL = "drops/{drop_name}/assets";
+DropioApiClient.CREATE_FILE_FROM_URL_URL = "drops/{drop_name}/assets";
 DropioApiClient.CREATE_FILE_URL = "upload";
 DropioApiClient.GET_ASSET_LIST_URL = "drops/{drop_name}/assets";
 DropioApiClient.GET_ASSET_URL = "drops/{drop_name}/assets/{asset_name}";
@@ -496,6 +502,7 @@ DropioApiClient.UPDATE_DROP_METHOD = "put";
 DropioApiClient.DELETE_DROP_METHOD = "delete";
 DropioApiClient.CREATE_LINK_METHOD = "post";
 DropioApiClient.CREATE_NOTE_METHOD = "post";
+DropioApiClient.CREATE_FILE_FROM_URL_METHOD = "post";
 DropioApiClient.CREATE_FILE_METHOD = "post";
 DropioApiClient.GET_ASSET_LIST_METHOD = "get";
 DropioApiClient.GET_ASSET_METHOD = "get";
@@ -517,6 +524,7 @@ DropioApiClient.UPDATE_DROP_ACTION = "update_drop";
 DropioApiClient.DELETE_DROP_ACTION = "delete_drop";
 DropioApiClient.CREATE_LINK_ACTION = "create_link";
 DropioApiClient.CREATE_NOTE_ACTION = "create_note";
+DropioApiClient.CREATE_FILE_FROM_URL_ACTION = "create_file_url";
 DropioApiClient.CREATE_FILE_ACTION = "create_file";
 DropioApiClient.GET_ASSET_LIST_ACTION = "get_asset_list";
 DropioApiClient.GET_ASSET_ACTION = "get_asset";
@@ -543,6 +551,7 @@ DropioApiClient.DROP_NAME_VALIDATIONS =
                         DropioApiClient.DELETE_DROP_ACTION,
                         DropioApiClient.CREATE_LINK_ACTION,
                         DropioApiClient.CREATE_NOTE_ACTION,
+                        DropioApiClient.CREATE_FILE_FROM_URL_ACTION,
                         DropioApiClient.CREATE_FILE_ACTION,
                         DropioApiClient.GET_ASSET_LIST_ACTION,
                         DropioApiClient.GET_ASSET_ACTION,
@@ -605,7 +614,11 @@ DropioApiClient.createLinkUrl = function(the_drop_name) {
 DropioApiClient.createNoteUrl = function(the_drop_name) {
   return DropioApiClient.API_HOST + DropioApiClient.CREATE_NOTE_URL.replace(/{drop_name}/,the_drop_name);
 };
- 
+
+DropioApiClient.createFileFromUrlUrl = function(the_drop_name) {
+  return DropioApiClient.API_HOST + DropioApiClient.CREATE_FILE_FROM_URL_URL.replace(/{drop_name}/,the_drop_name);
+};
+
 DropioApiClient.createFileUrl = function() {
   return DropioApiClient.UPLOAD_HOST + DropioApiClient.CREATE_FILE_URL;
 };
