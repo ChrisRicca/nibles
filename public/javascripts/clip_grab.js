@@ -4,6 +4,7 @@ _ClipGrab.Grabber = function(){
     this.locationURL = document.location.href;
     this.buildUI();
     this.buildIframe();
+    this.activate();
   };
   
   this.targetDrop = function() {
@@ -12,8 +13,8 @@ _ClipGrab.Grabber = function(){
   
   this.buildUI = function() {
     this.uiContainer = document.createElement('div');
-    this.uiContainer.setAttribute('style',"position:fixed;top:0px;right:0px;background-color:#EEEEEE;border-left:1px solid #333333;border-bottom:1px solid #333333;width:200px;height:40px;");
-    this.uiContainer.innerHTML = "<input type='submit' value='click ME' onclick='sendMessage(\"testing\");return false;'/>";
+    this.uiContainer.setAttribute('style',"position:fixed;top:0px;right:0px;background-color:#EEEEEE;border-left:1px solid #333333;border-bottom:1px solid #333333;width:200px;height:40px;z-index:9999;");
+    this.uiContainer.innerHTML = "<a href='http://drop.io/" + this.targetDrop().name + "'>View Your Nibbles</a>";
     document.body.appendChild(this.uiContainer);
   };
   
@@ -34,6 +35,23 @@ _ClipGrab.Grabber = function(){
   
   this.encodeMessage = function(action,message) {
     return this.targetDrop().name + "_a_a_a_" + action + "_a_a_a_" + escape(message);
+  };
+  
+  this.activate = function() {
+    document.onmouseup = function(e) {
+      if (!e) var e = window.event;
+      var relTarg = e.relatedTarget || e.fromElement;
+      if (e.target.tagName == "IMG") {
+        
+        src = e.target.getAttribute('src');
+        if (src.indexOf('http') == -1) {
+          base = document.baseURI;
+          src = base.substring(0,base.lastIndexOf('/')) + src
+        }
+        _ClipGrab.grabber.addFile(src)
+      };
+      return false;
+    };
   };
   
   this.initialize();
