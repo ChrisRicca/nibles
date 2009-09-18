@@ -8,6 +8,10 @@
       actions = {
         addfile:function(dropname,url){
           dropioApi.createFileFromUrl({drop_name:dropname,file_url:url}, function(){});
+        },
+        
+        addnote:function(dropname,body){
+          dropioApi.createNote({drop_name:dropname,contents:body})
         }
       }
       
