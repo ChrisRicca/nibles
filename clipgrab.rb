@@ -30,7 +30,8 @@ post '/' do
   redirect "/#{@drop.name}", 303
 end
 
-get '/iframe.html' do
+get '/*/iframe.html' do
+  @originatingURL = params[:splat]
   erb :iframe
 end
 

@@ -2,16 +2,25 @@
   <head>
     <script src="/javascripts/dropioApiClient.js" language="javascript" type="text/javascript"></script>
     <script>
+            
+      var originatingURL = unescape('<%= @originatingURL %>');
       
       var dropioApi = new DropioApiClient("1aca9fef21a9110c9f583c4ea8202ee23e5f8e94","<%= HOSTNAME %>DropioJSClientXDReceiver.html");
 
+      function addOriginatingUrl(response,success) {
+        if(success) {
+          dropioApi.createComment({drop_name:document.currentDrop,asset_name:response.name, contents:("from: "+ originatingURL)});
+        }
+      }
+      
       actions = {
         addfile:function(dropname,url){
-          dropioApi.createFileFromUrl({drop_name:dropname,file_url:url}, function(){});
+          dropioApi.createFileFromUrl({drop_name:document.currentDrop,file_url:url})
+          // add originating URL doesn't work because the link gets destroyed
         },
         
         addnote:function(dropname,body){
-          dropioApi.createNote({drop_name:dropname,contents:body})
+          dropioApi.createNote({drop_name:dropname,contents:body}, addOriginatingUrl)
         }
       }
       
@@ -27,6 +36,7 @@
           dropname = data[0];
           action = data[1];
           message = unescape(data[2]);
+          document.currentDrop = dropname;  //hacky
           actions[action](dropname,message)
         }
         window.setTimeout(checkLocationHash,100)

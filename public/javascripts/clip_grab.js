@@ -1,7 +1,7 @@
 _ClipGrab.Grabber = function(){
   this.initialize = function() {
-    this.iFrameURL = _ClipGrab.hostname + 'iframe.html';
     this.locationURL = document.location.href;
+    this.iFrameURL = _ClipGrab.hostname + escape(this.locationURL) + '/iframe.html';
     this.itemCount = 0;
     this.buildUI();
     this.buildIframe();
