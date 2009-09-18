@@ -64,7 +64,7 @@ _ClipGrab.Grabber = function(){
     //Build UI for images
     images = document.getElementsByTagName('img')
     for (var i = 0; i < images.length; i++) { 
-      if(images[i].tagName == "IMG" && images[i].parentNode != this.uiContainer) _ClipGrab.buildLinkForImage(images[i]);
+      if(images[i].tagName == "IMG" && images[i].parentNode != this.uiContainer && images[i].offsetWidth > 25) _ClipGrab.buildLinkForImage(images[i]);
     }
     
     //Add Handler for text
@@ -79,37 +79,44 @@ _ClipGrab.Grabber = function(){
 
 _ClipGrab.buildLinkForImage = function(img) {
   src = img.getAttribute('src');
-  if (src.indexOf('http') == -1) {
-    base = document.baseURI;
-    src = base.substring(0,base.lastIndexOf('/')) + src;
-  }
-  
-  img.style.border = "1px dotted #CCCCCC"
-  a = document.createElement('a');
-  a.setAttribute('href',src);
-  a.innerHTML = 'add';
-  a.style.position = 'absolute';
-  a.style.left = _ClipGrab.findPosX(img) + img.offsetWidth - 81 + 'px';
-  a.style.top = _ClipGrab.findPosY(img) + img.offsetHeight - 28 + 'px';
-  a.style.zIndex = "9999";
-  a.style.backgroundColor = "#222222";
-  a.style.color = "#FFFFFF";
-  a.style.textDecoration = "none";
-  a.style.padding = "3px";
-  a.style.width = "75px";
-  a.style.height = "22px";
-  a.style.textAlign = "center";
-  a.pairedClipGrabImage = img;
+  if(src) {
+    if (src.indexOf('http') == -1) {
+      base = document.baseURI;
+      src = base.substring(0,base.lastIndexOf('/')) + src;
+    }
 
-  a.onclick = function() {
-    _ClipGrab.grabber.addFile(this.getAttribute('href'));
-    a.pairedClipGrabImage.style.border = "1px solid transparent";
-    this.style.backgroundColor = "#777777";
-    this.innerHTML = 'added'
-    return false;
+    img.style.border = "1px dotted #CCCCCC"
+    a = document.createElement('a');
+    a.setAttribute('href',src);
+    a.innerHTML = '+ NIBL';
+    a.style.position = 'absolute';
+    a.style.left = _ClipGrab.findPosX(img) + img.offsetWidth - 78 + 'px';
+    a.style.top = _ClipGrab.findPosY(img) + img.offsetHeight - 25 + 'px';
+    a.style.zIndex = "9999";
+    a.style.backgroundColor = "#222222";
+    a.style.color = "#FFFFFF";
+    a.style.textDecoration = "none";
+    a.style.padding = "1px";
+    a.style.width = "75px";
+    a.style.height = "22px";
+    a.style.textAlign = "center";
+    a.style.fontSize = "14px";
+    a.style.lineHeight = "22px";
+    a.style.borderBottom = "1px solid #000000";
+    a.style.borderRight = "1px solid #000000";
+    a.pairedClipGrabImage = img;
+
+    a.onclick = function() {
+      _ClipGrab.grabber.addFile(this.getAttribute('href'));
+      a.pairedClipGrabImage.style.border = "1px solid transparent";
+      this.style.backgroundColor = "#999999";
+      this.style.border = "";
+      this.innerHTML = 'added';
+      return false;
+    }
+
+    document.body.appendChild(a);
   }
-  
-  document.body.appendChild(a);
 };
 
 _ClipGrab.getSelText = function ()
