@@ -10,7 +10,7 @@ configure do
 end
 
 configure :production do
-  HOSTNAME = "http://clipgrab.heroku.com/"
+  HOSTNAME = "http://nibles.heroku.com/"
   Dropio.api_key = "3c9f26eb4cac5c03223d7f96b2286b68297c8686"
   JAVASCRIPT_API_KEY = "20bc18e305cc8c1cd943085d4ac53ce088968b11"
 end
