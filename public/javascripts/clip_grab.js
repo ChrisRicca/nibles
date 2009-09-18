@@ -71,6 +71,7 @@ _ClipGrab.Grabber = function(){
     document.onmouseup = function(){
       text = _ClipGrab.getSelText();
       if (text && text!="") _ClipGrab.grabber.addNote(text);
+      window.getSelection().removeAllRanges()
     };
   };
   
