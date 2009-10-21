@@ -22,6 +22,7 @@ configure :development do
 end
 
 get '/' do
+  cache_this
   erb :new, :layout => :application
 end
 
@@ -32,6 +33,7 @@ end
 
 get '/*/iframe.html' do
   @originatingURL = params[:splat]
+  cache_this
   erb :iframe
 end
 
@@ -42,11 +44,16 @@ end
 
 get '/:dropname/go_bookmarklet.js' do
   @dropname = params[:dropname]
+  cache_this
   erb :bookmarklet_execute_script
 end
 
 helpers do
   def bookmarklet_script(dropname)
     erb :bookmarklet_loader_script, :locals => {:dropname => dropname}
+  end
+  
+  def cache_this(minutes = 600)
+    headers['Cache-Control'] = "public, max-age=#{minutes}"
   end
 end
